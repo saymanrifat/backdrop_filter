@@ -1,4 +1,5 @@
 import 'dart:io' show Platform, exit;
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,26 +26,29 @@ class _HomePageState extends State<HomePage> {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text('Exit'),
-            content: Text('Are you want to close this app'),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    // Navigator.pop(context);
-                    if (Platform.isAndroid) {
-                      SystemNavigator.pop();
-                    } else if (Platform.isIOS) {
-                      exit(0);
-                    }
-                  },
-                  child: Text('Yes')),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('No')),
-            ],
+          return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
+            child: AlertDialog(
+              title: Text('Exit'),
+              content: Text('Are you want to close this app'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      // Navigator.pop(context);
+                      if (Platform.isAndroid) {
+                        SystemNavigator.pop();
+                      } else if (Platform.isIOS) {
+                        exit(0);
+                      }
+                    },
+                    child: Text('Yes')),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('No')),
+              ],
+            ),
           );
         });
   }
